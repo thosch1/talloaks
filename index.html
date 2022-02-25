@@ -1,14 +1,149 @@
 <!DOCTYPE html>
+
+<head>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-221445864-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+</head>
 <style>
     body {
-      background-image: url('freddy.jpg');
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-size: 100% 100%;
+        background-image: url('freddy.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100% 100%;
     }
-    </style>
+
+    p {
+        font-family: "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-weight: 700;
+        font-style: normal;
+        letter-spacing: .01em;
+        text-transform: uppercase;
+        font-size: 100px;
+        color: white;
+        -webkit-text-stroke-width: 3px;
+        -webkit-text-stroke-color: black;
+    }
+
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        overflow: hidden;
+    }
+
+    section {
+        position: absolute;
+        z-index: 100;
+    }
+
+    .logo {
+        position: absolute;
+
+        width: 400px;
+        font-size: 100px;
+        text-align: center;
+        color: rgb(0, 81, 255);
+    }
+
+    @media (max-width: 768px) {
+        .logo {
+            width: 150px;
+        }
+    }
+</style>
 <html>
-    <body>
-        <div>THE UNOFFICAL SITE OF TALLOAKS - THE BAND</div>
-    </body>
+
+<body>
+    <section>
+        <div class="logo">sound up</div>
+    </section>
+    <div style="z-index: 1;">THE UNOFFICAL SITE OF TALLOAKS - THE BAND</div>
+    <audio id="experience" loop>
+        <source src="experience.mp3" type="audio/mp3">
+        Your browser sucks you boomer.
+    </audio>
+    <div style="align-items: center; text-align: center;">
+        <p id="countdown"></p>
+    </div>
+</body>
+
+<script>
+    document.onclick = function (event) {
+        console.log('click');
+        ga('send', 'event', 'click', 'countdown');
+        document.getElementById("experience").play();
+        var count = 10;
+        setInterval(function () {
+            document.getElementById('countdown').innerHTML = "please wait <br /> Redirecting in " + count + " seconds...";
+            if (count == 0) {
+                ga('send', 'event', 'redirect', 'leave');
+                window.location.href = "http://www.talloaksband.com";
+            }
+            count--;
+        }, 1000);
+    }
+
+    const section = document.querySelector("section");
+    const logo = document.querySelector(".logo");
+    const FPS = 60;
+    section.style.height = window.innerHeight + "px";
+    section.style.width = window.innerWidth + "px";
+
+    // Logo moving velocity Variables
+    let xPosition = 10;
+    let yPosition = 10;
+    let xSpeed = 4;
+    let ySpeed = 4;
+    function update() {
+        logo.style.left = xPosition + "px";
+        logo.style.top = yPosition + "px";
+    }
+
+    setInterval(() => {
+        if (xPosition + logo.clientWidth >= window.innerWidth || xPosition <= 0) {
+            xSpeed = -xSpeed;
+            logo.style.color = randomColor();
+        }
+        if (yPosition + logo.clientHeight >= window.innerHeight || yPosition <= 0) {
+            ySpeed = -ySpeed;
+            logo.style.color = randomColor();
+        }
+
+        xPosition += xSpeed;
+        yPosition += ySpeed;
+        update();
+    }, 1000 / FPS);
+    function randomColor() {
+        let color = "#";
+        color += Math.random().toString(16).slice(2, 8).toUpperCase();
+
+        var o = Math.round, r = Math.random, s = 255;
+        return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ')';
+
+        return color;
+    }
+    console.log(randomColor());
+
+    window.addEventListener("resize", () => {
+        xPosition = 10;
+        yPosition = 10;
+
+        section.style.height = window.innerHeight + "px";
+        section.style.width = window.innerWidth + "px";
+    });
+
+</script>
+
 </html>
