@@ -13,20 +13,22 @@
         ga('send', 'pageview');
 
         document.onclick = function (event) {
-        console.log('click');
-        ga('send', 'event', 'click', 'countdown');
-        document.getElementById("experience").play();
-        var count = 10;
-        setInterval(function () {
-            document.getElementById('countdown').innerHTML = "please wait <br /> Redirecting in " + count + " seconds...";
-            if (count == 0) {
-                ga('send', 'event', 'redirect', 'leave');
-                window.location.href = "http://www.talloaksband.com";
-            }
-            count--;
-        }, 1000);
-    }
+            console.log('click');
+            ga('send', 'event', 'click', 'countdown');
+            document.getElementById("experience").play();
+            var count = 10;
+            setInterval(function () {
+                document.getElementById('countdown').innerHTML = "please wait <br /> Redirecting in " + count + " seconds...";
+                if (count == 0) {
+                    ga('send', 'event', 'redirect', 'leave');
+                    window.location.href = "http://www.talloaksband.com";
+                }
+                count--;
+            }, 1000);
+        }
     </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9834416698464448"
+        crossorigin="anonymous"></script>
 </head>
 <style>
     body {
